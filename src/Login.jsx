@@ -1,10 +1,28 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { BASE_URL } from "./utils/constants";
+import { useDispatch } from "react-redux";
+import { addUser } from "./utils/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleLogin = async () => {};
+  const handleLogin = async () => {
+    try {
+      const res = await axios.post(BASE_URL + "/login", {
+        emailId,
+        password,
+      });
+      dispatch(addUser(res.data));
+      navigate("/feed");
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
 
   return (
     <div className="card card-dash bg-base-300 w-96 flex items-center  mx-auto my-10">
@@ -16,7 +34,8 @@ const Login = () => {
             <input
               type="text"
               className="input"
-              onChange={(e) => setEmail(e.target.value)}
+              value={emailId}
+              onChange={(e) => setEmailId(e.target.value)}
             />
           </fieldset>
           <fieldset className="fieldset w-full">
@@ -24,12 +43,13 @@ const Login = () => {
             <input
               type="password"
               className="input"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </fieldset>
           <button
             className="btn btn-primary mx-auto mt-4"
-            onClick={() => handleLogin()}
+            onClick={handleLogin}
           >
             Login
           </button>
