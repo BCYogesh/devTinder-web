@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-base-300 shadow-sm">
+    <div className="sticky top-0 z-10 navbar bg-base-300 shadow-sm">
       <div className="flex-1">
         <h1 className="font-bold text-2xl">
           <Link to="/feed" className="text-3xl mr-2">
@@ -56,7 +56,10 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <a>Settings</a>
+                <Link to="/connections">My Connections</Link>
+              </li>
+              <li>
+                <Link to="/requests">Requests</Link>
               </li>
               <li>
                 <Link to="/logout" onClick={handleLogout}>
