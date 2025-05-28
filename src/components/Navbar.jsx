@@ -25,10 +25,10 @@ const Navbar = () => {
     <div className="sticky top-0 z-10 navbar bg-base-300 shadow-sm">
       <div className="flex-1">
         <h1 className="font-bold text-2xl">
-          <Link to="/feed" className="text-3xl mr-2">
+          <Link to="/feed">
             👨‍💻
+            <span>DevTinder</span>
           </Link>
-          <span>DevTinder</span>
         </h1>
       </div>
       {user && (
