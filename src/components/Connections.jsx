@@ -7,6 +7,7 @@ import { addConnections } from "../utils/connectionSlice";
 const Connections = () => {
   const dispatch = useDispatch();
   const connections = useSelector((store) => store.connections);
+
   const getConnections = async () => {
     try {
       const res = await axios.get(BASE_URL + "/user/connections", {
@@ -23,13 +24,16 @@ const Connections = () => {
   }, []);
 
   if (!connections) return;
+
   return !connections || connections.length == 0 ? (
-    "No connections found!"
+    <>
+      <p className="text-center mt-4 font-semibold">No connections found!</p>
+    </>
   ) : (
     <div className="flex justify-center flex-col items-center">
-      {connections.map((request) => {
-        const { _id, firstName, lastName, photoURL, age, gender, about } =
-          request.fromUserId;
+      {connections.map((connection) => {
+        var { _id, firstName, lastName, photoURL, age, gender, about } =
+          connection.toUserId;
 
         return (
           <div

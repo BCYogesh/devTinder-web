@@ -40,18 +40,16 @@ const Requests = () => {
 
   if (!requestUserObj) return;
   return !requestUserObj || requestUserObj.length == 0 ? (
-    <h3 className="font-semibold text-2xl mt-4 text-center">
-      No Requests found!
-    </h3>
+    <p className="font-semibold mt-4 text-center">No Requests found!</p>
   ) : (
     <div className="flex justify-center flex-col items-center">
       {requestUserObj.map((request) => {
         const { _id, firstName, lastName, photoURL, age, gender, about } =
-          request.fromUserId;
+          request.toUserId;
 
         return (
           <div
-            className="w-4/5 bg-base-300 h-32 m-4 p-2 rounded-lg flex items-center"
+            className="w-1/2 bg-base-300 h-32 m-4 p-2 rounded-lg flex items-center"
             key={_id}
           >
             <div className="h-full image">
@@ -60,7 +58,7 @@ const Requests = () => {
             <div className="ml-4 font-semibold leading-loose">
               <h4 className="text-2xl">{firstName + " " + lastName}</h4>
               <p>{gender || "" + ", " + age || ""}</p>
-              <p>{about}</p>
+              <p className="text-xs">{about}</p>
             </div>
             <div className="ml-auto">
               <button

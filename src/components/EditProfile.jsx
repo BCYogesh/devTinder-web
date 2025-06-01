@@ -8,42 +8,46 @@ import { useNavigate } from "react-router-dom";
 const EditProfile = ({ user }) => {
   const [firstName, setFirstName] = useState(user?.firstName);
   const [lastName, setLastName] = useState(user?.lastName);
-  const [age, setAge] = useState(user?.age);
-  const [gender, setGender] = useState(user?.gender);
+  const [age, setAge] = useState(user?.age || "");
+  const [gender, setGender] = useState(user?.gender || "");
   const [photoUrl, setPhotoUrl] = useState(user?.photoURL);
   const [skills, setSkills] = useState(user?.skills);
-  const [about, setAbout] = useState(user?.about);
+  const [about, setAbout] = useState(user?.about || "");
   const [saveAlert, setSaveAlert] = useState(false);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const saveProfile = async () => {
-    const res = await axios.patch(
-      BASE_URL + "/profile/edit",
-      {
-        firstName: firstName,
-        lastName: lastName,
-        age: age,
-        gender: gender,
-        photoURL: photoUrl,
-        skills: skills,
-        about: about,
-      },
-      {
-        withCredentials: true,
-      }
-    );
-    setSaveAlert(true);
+    try {
+      const res = await axios.patch(
+        BASE_URL + "/profile/edit",
+        {
+          firstName: firstName,
+          lastName: lastName,
+          age: age,
+          gender: gender,
+          photoURL: photoUrl,
+          skills: skills,
+          about: about,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      setSaveAlert(true);
 
-    const onSaveNavigate = () => {
-      setSaveAlert(false);
-      navigate("/");
-    };
-    setTimeout(() => {
-      onSaveNavigate();
-    }, 3000);
-    dispatch(addUser(res?.data));
+      const onSaveNavigate = () => {
+        setSaveAlert(false);
+        navigate("/");
+      };
+      setTimeout(() => {
+        onSaveNavigate();
+      }, 3000);
+      dispatch(addUser(res?.data));
+    } catch (err) {
+      setError(err?.response?.data);
+    }
   };
   return (
     <div className="relative">
@@ -124,7 +128,7 @@ const EditProfile = ({ user }) => {
                   onChange={(e) => setAbout(e.target.value)}
                 ></textarea>
               </fieldset>
-              <p className="text-red-500">{error}</p>
+              <span className="text-red-500 w-full">{error}</span>
               <button
                 className="btn btn-primary mx-auto mt-4"
                 onClick={saveProfile}
