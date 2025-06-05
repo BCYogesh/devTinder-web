@@ -62,7 +62,7 @@ const Login = () => {
   };
 
   return (
-    <div className="card card-dash bg-base-300 w-96 flex items-center  mx-auto my-10">
+    <div className="card card-dash bg-base-300 w-96 flex items-center mx-auto my-3">
       <div className="card-body w-full">
         <h2 className="card-title my-0 mx-auto">
           {isLoginForm ? "Login" : "Signup"}
@@ -117,7 +117,7 @@ const Login = () => {
           </button>
         </div>
       </div>
-      <p className="mx-auto cursor-pointer py-2" onClick={handlePage}>
+      <p className="mx-auto cursor-pointer py-1 mb-2" onClick={handlePage}>
         {isLoginForm ? (
           <>
             Or signup using? <span className="text-blue-300">Signup</span>

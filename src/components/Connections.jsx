@@ -33,22 +33,31 @@ const Connections = () => {
     <div className="flex justify-center flex-col items-center">
       {connections.map((connection) => {
         var { _id, firstName, lastName, photoURL, age, gender, about } =
-          connection.toUserId;
+          connection;
 
         return (
-          <div
-            className="w-4/5 bg-base-300 h-32 m-4 p-2 rounded-lg flex items-center"
+          <ul
+            className="list bg-base-300 rounded-box shadow-md w-1/2 mt-2"
             key={_id}
           >
-            <div className="h-full image">
-              <img src={photoURL} alt="image" className="h-full rounded-lg" />
-            </div>
-            <div className="ml-4 font-semibold leading-loose">
-              <h4 className="text-2xl">{firstName + " " + lastName}</h4>
-              <p>{gender || "" + ", " + age || ""}</p>
-              <p>{about}</p>
-            </div>
-          </div>
+            <li className="list-row">
+              <div>
+                <img
+                  className="size-10 rounded-box object-contain"
+                  src={photoURL}
+                />
+              </div>
+
+              <div>
+                <div>{firstName + " " + lastName}</div>
+                <div className="text-xs uppercase font-semibold opacity-60">
+                  {age && (age || "") + ", "}
+                  {gender || ""}
+                </div>
+              </div>
+              <p className="list-col-wrap text-xs">{about}</p>
+            </li>
+          </ul>
         );
       })}
     </div>

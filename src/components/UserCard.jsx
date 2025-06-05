@@ -28,10 +28,10 @@ const UserCard = ({ users }) => {
   return users.length <= 0 ? (
     <p className="text-center m-4">New Users not found</p>
   ) : (
-    <div className="flex justify-center m-8">
+    <div className="flex justify-center p-4">
       <div className="card bg-base-300 w-96 shadow-sm">
         <figure>
-          <img src={photoURL} alt="image" />
+          <img className="size-80" src={photoURL} alt="image" />
         </figure>
         <div className="card-body">
           <h2 className="card-title">{firstName + " " + lastName}</h2>

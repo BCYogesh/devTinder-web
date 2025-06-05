@@ -39,42 +39,74 @@ const Requests = () => {
   }, []);
 
   if (!requestUserObj) return;
+  console.log(requestUserObj);
   return !requestUserObj || requestUserObj.length == 0 ? (
     <p className="font-semibold mt-4 text-center">No Requests found!</p>
   ) : (
     <div className="flex justify-center flex-col items-center">
       {requestUserObj.map((request) => {
         const { _id, firstName, lastName, photoURL, age, gender, about } =
-          request.toUserId;
+          request.fromUserId;
+        console.log(request.fromUserId);
 
         return (
-          <div
-            className="w-1/2 bg-base-300 h-32 m-4 p-2 rounded-lg flex items-center"
+          <ul
+            className="list bg-base-300 rounded-box shadow-md w-1/2 mt-2"
             key={_id}
           >
-            <div className="h-full image">
-              <img src={photoURL} alt="image" className="h-full rounded-lg" />
-            </div>
-            <div className="ml-4 font-semibold leading-loose">
-              <h4 className="text-2xl">{firstName + " " + lastName}</h4>
-              <p>{gender || "" + ", " + age || ""}</p>
-              <p className="text-xs">{about}</p>
-            </div>
-            <div className="ml-auto">
+            <li className="list-row">
+              <div>
+                <img className="size-10 rounded-box" src={photoURL} />
+              </div>
+              <div>
+                <div>{firstName + " " + lastName}</div>
+                <div className="text-xs uppercase font-semibold opacity-60">
+                  {age && (age || "") + ", "}
+                  {gender || ""}
+                </div>
+              </div>
+              <p className="list-col-wrap text-xs">{about}</p>
               <button
-                className="btn btn-soft btn-error mr-2"
+                className="btn btn-square btn-ghost"
                 onClick={() => reviewRequest(request?._id, "rejected")}
               >
-                Reject
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="48"
+                  height="48"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#e5383b"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="15" y1="9" x2="9" y2="15" />
+                  <line x1="9" y1="9" x2="15" y2="15" />
+                </svg>
               </button>
               <button
-                className="btn btn-soft btn-success"
+                className="btn btn-square btn-ghost"
                 onClick={() => reviewRequest(request?._id, "accepted")}
               >
-                Accept
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="48"
+                  height="48"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#04e762"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" stroke="#04e762" />
+                  <path d="M9 12l2 2l4 -4" />
+                </svg>
               </button>
-            </div>
-          </div>
+            </li>
+          </ul>
         );
       })}
     </div>
