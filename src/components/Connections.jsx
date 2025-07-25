@@ -31,14 +31,14 @@ const Connections = () => {
       <p className="text-center mt-4 font-semibold">No connections found!</p>
     </>
   ) : (
-    <div className="flex justify-center flex-col items-center">
+    <div className="flex justify-center flex-col items-center p-2">
       {connections.map((connection) => {
         const { _id, firstName, lastName, photoURL, age, gender, about } =
           connection;
 
         return (
           <ul
-            className="list bg-base-300 rounded-box shadow-md w-1/2 mt-2"
+            className="list bg-base-300 rounded-box shadow-md md:w-3/4 w-full mt-2"
             key={_id}
           >
             <li className="list-row">
@@ -55,7 +55,7 @@ const Connections = () => {
                   {age && (age || "") + ", "}
                   {gender || ""}
                 </div>
-                <p className="list-col-wrap mt-2 text-xs w-[70%]">{about}</p>
+                <p className="list-col-wrap mt-4 text-xs w-[100%]">{about}</p>
               </div>
               <Link to={"/chat/" + _id}>
                 <button className="btn btn-primary">Chat</button>
