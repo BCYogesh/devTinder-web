@@ -39,11 +39,11 @@ const EditProfile = ({ user }) => {
 
       const onSaveNavigate = () => {
         setSaveAlert(false);
-        navigate("/");
+        navigate("/feed");
       };
       setTimeout(() => {
         onSaveNavigate();
-      }, 3000);
+      }, 2000);
       dispatch(addUser(res?.data));
     } catch (err) {
       setError(err?.response?.data);
@@ -51,8 +51,8 @@ const EditProfile = ({ user }) => {
   };
   return (
     <div className="relative">
-      <div className="flex justify-center gap-10 items-center">
-        <div className="card card-dash bg-base-300 w-2/6 flex items-center my-10">
+      <div className="flex flex-wrap justify-center gap-10 items-center">
+        <div className="card card-dash bg-base-300 sm:w-2/6 w-full flex items-center m-4">
           <div className="card-body w-full">
             <h2 className="card-title my-0 mx-auto">Edit Profile</h2>
             <div className="card-actions gap-0">
@@ -93,9 +93,7 @@ const EditProfile = ({ user }) => {
                   onChange={(e) => setGender(e.target.value)}
                   value={gender}
                 >
-                  <option defaultValue={true} disabled={true}>
-                    Select
-                  </option>
+                  <option defaultValue={true}>Select</option>
                   <option value={"Male"}>Male</option>
                   <option value={"Female"}>Female</option>
                   <option value={"Other"}>Other</option>
@@ -167,7 +165,7 @@ const EditProfile = ({ user }) => {
       {saveAlert && (
         <div
           role="alert"
-          className="absolute top-[-20px] left-1/4 alert alert-success w-1/2"
+          className="absolute top-[-10px] left-1/4 alert alert-success w-1/2 z-10"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

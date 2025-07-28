@@ -39,19 +39,17 @@ const Requests = () => {
   }, []);
 
   if (!requestUserObj) return;
-  console.log(requestUserObj);
   return !requestUserObj || requestUserObj.length == 0 ? (
     <p className="font-semibold mt-4 text-center">No Requests found!</p>
   ) : (
-    <div className="flex justify-center flex-col items-center">
+    <div className="flex justify-center flex-col items-center m-4">
       {requestUserObj.map((request) => {
         const { _id, firstName, lastName, photoURL, age, gender, about } =
           request.fromUserId;
-        console.log(request.fromUserId);
 
         return (
           <ul
-            className="list bg-base-300 rounded-box shadow-md w-1/2 mt-2"
+            className="list bg-base-300 rounded-box shadow-md w-full sm:w-1/2 mt-2"
             key={_id}
           >
             <li className="list-row">
