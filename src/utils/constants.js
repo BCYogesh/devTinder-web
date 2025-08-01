@@ -1,4 +1,4 @@
-export const BASE_URL = location.hostname === "localhost" ? "http://localhost:3000" : "https://devtinder-oeoo.onrender.com";
+export const BASE_URL = location.hostname === "localhost" ? "http://localhost:3000" : "https://devtinder-djkw.onrender.com";
 
 
 export const extractISTTime = (fullDate) => {
